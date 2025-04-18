@@ -1,12 +1,12 @@
 import {Schema, model, Document} from 'mongoose';
-import ReactionSchema from './Reaction';
+import ReactionSchema, { type IReaction } from './Reaction';
 import formatDate from '../utils/dateFormat';
 
 interface IThought extends Document {
     thoughtText: string;
     createdAt: Date;
     username: string;
-    reactions: [typeof ReactionSchema];
+    reactions: IReaction[];
 }
 
 const ThoughtSchema = new Schema<IThought>(

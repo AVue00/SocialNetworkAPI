@@ -1,6 +1,6 @@
 
 const formatDate = (date: any) => {
-    const validDate = new Date(date)
+    // const validDate = new Date(date)
     return date.toLocaleString('en-US', {
         weekday: 'long',
         year: 'numeric',
