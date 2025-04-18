@@ -10,7 +10,7 @@ interface IReaction extends Document {
 
 const ReactionSchema = new Schema<IReaction>(
     {
-        reactionID: {
+        reactionId: {
             type: Schema.Types.ObjectId,
             default: () => new Types.ObjectId()
         },
