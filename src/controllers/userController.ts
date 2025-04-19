@@ -61,3 +61,40 @@ export const deleteUser = async (req: Request, res: Response) => {
     }
 }
 
+export const addFriend = async (req: Request, res: Response) => {
+    try {
+        const userId = await User.findOneAndUpdate( {_id: req.params.userId},
+            { $addToSet: { friends: req.params.friendId } }
+         );
+        const friendId = await User.findOneAndUpdate( {_id: req.params.friendId},
+            { $addToSet: { friends: req.params.userId } }
+         );
+        if (userId && friendId) {
+            res.json({ message: 'Users are now friends!'});
+        } else {
+            res.status(404).json({ message: 'Users cannot be friends'});
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(400).json(err);
+    }
+}
+
+export const removeFriend = async (req: Request, res: Response) => {
+    try {
+        const userId = await User.findOneAndUpdate( {_id: req.params.userId},
+            { $pull: { friends: req.params.friendId } }
+         );
+        const friendId = await User.findOneAndUpdate( {_id: req.params.friendId},
+            { $pull: { friends: req.params.userId } }
+         );
+        if (userId && friendId) {
+            res.json({ message: 'Users are no longer friends'});
+        } else {
+            res.status(404).json({ message: 'Users cannot be defriended'});
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(400).json(err);
+    }
+}

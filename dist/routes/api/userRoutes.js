@@ -1,7 +1,8 @@
 import { Router } from 'express';
-import { getAllUsers, getUserById, createUser, updateUser, deleteUser } from '../../controllers/userController.js';
+import { getAllUsers, getUserById, createUser, updateUser, deleteUser, addFriend, removeFriend } from '../../controllers/userController.js';
 const router = Router();
 router.route('/').get(getAllUsers).post(createUser);
 router.route('/:id').get(getUserById).put(updateUser).delete(deleteUser);
-// router.route('/:_id/friends/:friendId').post().delete();
+router.route('/:userId/friends/:friendId').post(addFriend).delete(removeFriend);
+console.log(router.stack);
 export default router;

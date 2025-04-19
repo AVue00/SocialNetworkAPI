@@ -63,7 +63,7 @@ export const deleteThought = async (req, res) => {
 };
 export const addReaction = async (req, res) => {
     try {
-        const thoughtToUpdate = await Thought.findById(req.params.thoughtId);
+        const thoughtToUpdate = await Thought.findById(req.params.id);
         if (thoughtToUpdate) {
             thoughtToUpdate.reactions.push(req.body);
             const updatedThought = await thoughtToUpdate.save();
@@ -80,7 +80,7 @@ export const addReaction = async (req, res) => {
 };
 export const deleteReaction = async (req, res) => {
     try {
-        const thoughtToUpdate = await Thought.findById(req.params.thoughtId);
+        const thoughtToUpdate = await Thought.findById(req.params.id);
         if (thoughtToUpdate) {
             thoughtToUpdate.reactions = thoughtToUpdate.reactions.filter((reaction) => reaction.reactionId.toString() !== req.params.reactionId);
             const updatedThought = await thoughtToUpdate.save();
