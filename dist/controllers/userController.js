@@ -61,3 +61,20 @@ export const deleteUser = async (req, res) => {
         res.status(400).json(err);
     }
 };
+export const addFriend = async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        if (user) {
+            user.friends.push(req.params.friendId);
+            await user.save();
+            res.json(user);
+        }
+        else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    }
+    catch (err) {
+        console.log(err);
+        res.status(400).json(err);
+    }
+};

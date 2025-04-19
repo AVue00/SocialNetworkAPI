@@ -1,5 +1,5 @@
 import { Schema, Types } from 'mongoose';
-import formatDate from '../utils/dateFormat';
+import formatDate from '../utils/dateFormat.js';
 const ReactionSchema = new Schema({
     reactionId: {
         type: Schema.Types.ObjectId,
